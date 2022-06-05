@@ -2,7 +2,7 @@ type Whitepaper @entity {
   id: ID!
   owner: Bytes!
   paper: String
-  paperContent: [String!]
+  paperContent: String
   isEdited: Boolean!
 }
 

@@ -2,8 +2,8 @@ type Whitepaper @entity {
   id: ID!
   owner: Bytes!
   paper: String
-  paperContent: [String!]
-  notEmpty: Boolean!
+  paperContent: String
+  isEdited: Boolean!
 }
 
 type Transfer @entity {
@@ -11,4 +11,10 @@ type Transfer @entity {
     from: Bytes!
     to: Bytes!
     tokenId: BigInt!
+}
+
+type AppData @entity {
+    id: ID!
+    numMinted: Int!
+    numEdited : Int!
 }
