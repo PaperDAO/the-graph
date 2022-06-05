@@ -1,6 +1,6 @@
 specVersion: 0.0.2
 schema:
-  file: ./schema.graphql
+  file: schema.graphql
 dataSources:
   - kind: ethereum
     name: Whitepaper
@@ -20,10 +20,9 @@ dataSources:
         - DelegateVotesChanged
         - OwnershipTransferred
         - Transfer
-        - AppData
       abis:
         - name: Whitepaper
-          file: ./abis/Whitepaper.json
+          file: Whitepaper/abis/Whitepaper.json
       eventHandlers:
         - event: PageContact(string[],indexed uint256)
           handler: handlePageContact
@@ -31,5 +30,4 @@ dataSources:
           handler: handleTransfer
         - event: URI(string,indexed uint256)
           handler: handleURI
-
-      file: ./src/mapping.ts
+      file: Whitepaper/Whitepaper.wasm
