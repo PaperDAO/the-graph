@@ -6,7 +6,7 @@ dataSources:
     name: Whitepaper
     network: rinkeby
     source:
-      address: "0xb7F8F29a11Fe41bE6C749bB3f7E46AE11A5bFf13"
+      address: "0xCF3743e212D813366694B248DC2fDf2c4Fb0FB7C"
       abi: Whitepaper
       startBlock: 10796178
     mapping:
@@ -25,10 +25,11 @@ dataSources:
         - name: Whitepaper
           file: ./abis/Whitepaper.json
       eventHandlers:
-        - event: PageContact(string[],indexed uint256)
-          handler: handlePageContact
+
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
+        - event: PageContact(string,string[],indexed uint256)
+          handler: handlePageContact
         - event: URI(string,indexed uint256)
           handler: handleURI
 

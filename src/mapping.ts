@@ -68,6 +68,7 @@ export function handlePageContact(event: PageContact): void {
   appData.numMinted = appData.numEdited + 1;
 
   let whitepaper = Whitepaper.load(tokenId.toString()) as Whitepaper;
+  whitepaper.paperTitle = event.params.pageName;
   whitepaper.paperContent = event.params.pageContant;
   whitepaper.isEdited = true;
 
