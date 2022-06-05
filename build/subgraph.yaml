@@ -20,6 +20,7 @@ dataSources:
         - DelegateVotesChanged
         - OwnershipTransferred
         - Transfer
+        - AppData
       abis:
         - name: Whitepaper
           file: Whitepaper/abis/Whitepaper.json

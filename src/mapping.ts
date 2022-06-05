@@ -22,14 +22,17 @@ export function handleTransfer(event: Transfer): void {
 
   let whitepaper = Whitepaper.load(tokenId.toString());
 
-  let appData = AppData.load("app");
-  if (!AppData) {
-    appData = new AppData("app");
-    appData.numMinted = 1;
-    appData.numEdited = 0;
-  }
+  if (event.params.from == Address.fromString(ADDRESS_ZERO)) {
+    let appData = AppData.load("app");
+    if (!appData) {
+      appData = new AppData("app");
+      appData.numMinted = 0;
+      appData.numEdited = 0;
+    }
 
-  appData.numMinted = appData.numMinted + 1;
+    appData.numMinted = appData.numMinted + 1;
+    appData.save();
+  }
 
   if (!whitepaper) {
     whitepaper = new Whitepaper(tokenId.toString());
@@ -38,7 +41,7 @@ export function handleTransfer(event: Transfer): void {
     );
     whitepaper.paper = contract.tokenURI(tokenId);
   }
-  whitepaper.notEmpty = false;
+  whitepaper.isEdited = false;
   whitepaper.owner = newOwner;
 
   whitepaper.save();
@@ -65,8 +68,15 @@ export function handlePageContact(event: PageContact): void {
   const tokenId = event.params.tokenId;
 
   let appData = AppData.load("app");
-  appData.numMinted = appData.numEdited + 1;
+  if (!appData) {
+    appData = new AppData("app");
+    appData.numMinted = 0;
+    appData.numEdited = 0;
+  }
 
+  appData.numEdited = appData.numEdited + 1;
+
+  appData.save();
   let whitepaper = Whitepaper.load(tokenId.toString()) as Whitepaper;
   whitepaper.paperTitle = event.params.pageName;
   whitepaper.paperContent = event.params.pageContant;
