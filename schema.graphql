@@ -1,0 +1,12 @@
+type Whitepaper @entity {
+  id: ID!
+  owner: Bytes!
+  paper: String
+}
+
+type Transfer @entity {
+    id: ID!
+    from: Bytes!
+    to: Bytes!
+    tokenId: BigInt!
+}

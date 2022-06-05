@@ -1,0 +1,29 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Whitepaper
+    network: rinkeby
+    source:
+      address: "0x75a43163C74e0Ff26e9a53dA4658a405fbB11D84"
+      abi: Whitepaper
+      startBlock: 10796178
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - ApprovalForAll
+        - DelegateChanged
+        - DelegateVotesChanged
+        - OwnershipTransferred
+        - Transfer
+      abis:
+        - name: Whitepaper
+          file: ./abis/Whitepaper.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+      file: ./src/mapping.ts
